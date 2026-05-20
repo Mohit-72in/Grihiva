@@ -10,6 +10,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import java.math.BigDecimal;
@@ -20,12 +24,16 @@ import java.util.List;
 @Entity
 @Audited
 @Table(
-        name = "transaction_ledgers",
-        indexes = {
-                @Index(name = "idx_tx_ledger_unit_period", columnList = "unit_id,billing_period"),
-                @Index(name = "idx_tx_ledger_renter_period", columnList = "renter_id,billing_period")
-        }
+    name = "transaction_ledgers",
+    indexes = {
+        @Index(name = "idx_tx_ledger_unit_period", columnList = "unit_id,billing_period"),
+        @Index(name = "idx_tx_ledger_renter_period", columnList = "renter_id,billing_period")
+    }
 )
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TransactionLedger extends BaseEntity {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id", nullable = false)
@@ -64,97 +72,6 @@ public class TransactionLedger extends BaseEntity {
     private LedgerStatus status;
 
     @OneToMany(mappedBy = "ledgerEntry")
+    @Builder.Default
     private List<TransactionPayment> payments = new ArrayList<>();
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public User getRenter() {
-        return renter;
-    }
-
-    public void setRenter(User renter) {
-        this.renter = renter;
-    }
-
-    public YearMonth getBillingPeriod() {
-        return billingPeriod;
-    }
-
-    public void setBillingPeriod(YearMonth billingPeriod) {
-        this.billingPeriod = billingPeriod;
-    }
-
-    public BigDecimal getRentAmount() {
-        return rentAmount;
-    }
-
-    public void setRentAmount(BigDecimal rentAmount) {
-        this.rentAmount = rentAmount;
-    }
-
-    public BigDecimal getUtilityAmount() {
-        return utilityAmount;
-    }
-
-    public void setUtilityAmount(BigDecimal utilityAmount) {
-        this.utilityAmount = utilityAmount;
-    }
-
-    public BigDecimal getAdditionalCharges() {
-        return additionalCharges;
-    }
-
-    public void setAdditionalCharges(BigDecimal additionalCharges) {
-        this.additionalCharges = additionalCharges;
-    }
-
-    public BigDecimal getPreviousBalance() {
-        return previousBalance;
-    }
-
-    public void setPreviousBalance(BigDecimal previousBalance) {
-        this.previousBalance = previousBalance;
-    }
-
-    public BigDecimal getTotalDue() {
-        return totalDue;
-    }
-
-    public void setTotalDue(BigDecimal totalDue) {
-        this.totalDue = totalDue;
-    }
-
-    public BigDecimal getTotalPaid() {
-        return totalPaid;
-    }
-
-    public void setTotalPaid(BigDecimal totalPaid) {
-        this.totalPaid = totalPaid;
-    }
-
-    public BigDecimal getBalanceCarryForward() {
-        return balanceCarryForward;
-    }
-
-    public void setBalanceCarryForward(BigDecimal balanceCarryForward) {
-        this.balanceCarryForward = balanceCarryForward;
-    }
-
-    public LedgerStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(LedgerStatus status) {
-        this.status = status;
-    }
-
-    public List<TransactionPayment> getPayments() {
-        return payments;
-    }
 }

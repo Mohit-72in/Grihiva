@@ -7,6 +7,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import java.util.ArrayList;
@@ -15,6 +19,10 @@ import java.util.List;
 @Entity
 @Audited
 @Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User extends BaseEntity {
     @Column(nullable = false, length = 120)
     private String fullName;
@@ -34,6 +42,7 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
+    @Builder.Default
     private OwnerType ownerType = OwnerType.NONE;
 
     @Column(length = 255)
@@ -43,91 +52,14 @@ public class User extends BaseEntity {
     private String kycLastFour;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean kycApproved = false;
 
     @OneToMany(mappedBy = "renter", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<TransactionLedger> ledgerEntries = new ArrayList<>();
 
     @OneToMany(mappedBy = "collectedBy", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<TransactionPayment> collectedPayments = new ArrayList<>();
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public OwnerType getOwnerType() {
-        return ownerType;
-    }
-
-    public void setOwnerType(OwnerType ownerType) {
-        this.ownerType = ownerType;
-    }
-
-    public String getKycDocumentUrl() {
-        return kycDocumentUrl;
-    }
-
-    public void setKycDocumentUrl(String kycDocumentUrl) {
-        this.kycDocumentUrl = kycDocumentUrl;
-    }
-
-    public String getKycLastFour() {
-        return kycLastFour;
-    }
-
-    public void setKycLastFour(String kycLastFour) {
-        this.kycLastFour = kycLastFour;
-    }
-
-    public boolean isKycApproved() {
-        return kycApproved;
-    }
-
-    public void setKycApproved(boolean kycApproved) {
-        this.kycApproved = kycApproved;
-    }
-
-    public List<TransactionLedger> getLedgerEntries() {
-        return ledgerEntries;
-    }
-
-    public List<TransactionPayment> getCollectedPayments() {
-        return collectedPayments;
-    }
 }

@@ -10,6 +10,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import java.math.BigDecimal;
@@ -25,6 +29,10 @@ import java.util.List;
         @UniqueConstraint(name = "uk_building_unit_number", columnNames = {"building_id", "unit_number"})
     }
 )
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Unit extends BaseEntity {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)
@@ -51,6 +59,7 @@ public class Unit extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
+    @Builder.Default
     private UnitStatus status = UnitStatus.VACANT;
 
     private LocalDate expectedVacateDate;
@@ -60,100 +69,10 @@ public class Unit extends BaseEntity {
     private User currentRenter;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean active = true;
 
     @OneToMany(mappedBy = "unit")
+    @Builder.Default
     private List<TransactionLedger> ledgerEntries = new ArrayList<>();
-
-    public Building getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(Building building) {
-        this.building = building;
-    }
-
-    public String getUnitNumber() {
-        return unitNumber;
-    }
-
-    public void setUnitNumber(String unitNumber) {
-        this.unitNumber = unitNumber;
-    }
-
-    public UnitCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(UnitCategory category) {
-        this.category = category;
-    }
-
-    public BigDecimal getBaseRent() {
-        return baseRent;
-    }
-
-    public void setBaseRent(BigDecimal baseRent) {
-        this.baseRent = baseRent;
-    }
-
-    public BigDecimal getRentOverride() {
-        return rentOverride;
-    }
-
-    public void setRentOverride(BigDecimal rentOverride) {
-        this.rentOverride = rentOverride;
-    }
-
-    public BigDecimal getElectricityRateOverride() {
-        return electricityRateOverride;
-    }
-
-    public void setElectricityRateOverride(BigDecimal electricityRateOverride) {
-        this.electricityRateOverride = electricityRateOverride;
-    }
-
-    public String getMeterNumber() {
-        return meterNumber;
-    }
-
-    public void setMeterNumber(String meterNumber) {
-        this.meterNumber = meterNumber;
-    }
-
-    public UnitStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(UnitStatus status) {
-        this.status = status;
-    }
-
-    public LocalDate getExpectedVacateDate() {
-        return expectedVacateDate;
-    }
-
-    public void setExpectedVacateDate(LocalDate expectedVacateDate) {
-        this.expectedVacateDate = expectedVacateDate;
-    }
-
-    public User getCurrentRenter() {
-        return currentRenter;
-    }
-
-    public void setCurrentRenter(User currentRenter) {
-        this.currentRenter = currentRenter;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public List<TransactionLedger> getLedgerEntries() {
-        return ledgerEntries;
-    }
 }
