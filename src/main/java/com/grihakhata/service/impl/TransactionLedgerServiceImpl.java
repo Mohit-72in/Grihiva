@@ -1,11 +1,12 @@
 package com.grihakhata.service.impl;
 
 import com.grihakhata.domain.OwnerType;
-import com.grihakhata.domain.PaymentMode;
 import com.grihakhata.domain.LedgerStatus;
 import com.grihakhata.domain.TransactionLedger;
 import com.grihakhata.domain.TransactionPayment;
 import com.grihakhata.domain.User;
+import com.grihakhata.dto.LedgerResponseDTO;
+import com.grihakhata.dto.RentPaymentRequestDTO;
 import com.grihakhata.repository.TransactionLedgerRepository;
 import com.grihakhata.repository.TransactionPaymentRepository;
 import com.grihakhata.repository.UserRepository;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionLedgerServiceImpl implements TransactionLedgerService {
@@ -46,45 +48,52 @@ public class TransactionLedgerServiceImpl implements TransactionLedgerService {
     }
 
     @Override
-    public List<TransactionLedger> getByRenter(Long renterId) {
-        return transactionLedgerRepository.findByRenterId(renterId);
+    public List<LedgerResponseDTO> getByRenter(Long renterId) {
+        return transactionLedgerRepository.findByRenterId(renterId)
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public TransactionLedger logRentPayment(Long renterId, Long unitId, BigDecimal amountPaid, String paymentMode, OwnerType collectedBy) {
-        if (amountPaid == null || amountPaid.compareTo(BigDecimal.ZERO) <= 0) {
+    public LedgerResponseDTO logRentPayment(RentPaymentRequestDTO request) {
+        if (request.getAmountPaid() == null || request.getAmountPaid().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("amountPaid must be greater than zero");
         }
 
         TransactionLedger ledger = transactionLedgerRepository
-                .findTopByRenterIdAndUnitIdOrderByBillingPeriodDesc(renterId, unitId)
+                .findTopByRenterIdAndUnitIdOrderByBillingPeriodDesc(request.getRenterId(), request.getUnitId())
                 .orElseThrow(() -> new EntityNotFoundException("No ledger found for renter and unit"));
 
-        PaymentMode resolvedMode;
-        try {
-            resolvedMode = PaymentMode.valueOf(paymentMode.trim().toUpperCase());
-        } catch (RuntimeException ex) {
-            throw new IllegalArgumentException("Invalid paymentMode: " + paymentMode);
+        if (request.getCollectedBy() == OwnerType.NONE) {
+            throw new IllegalArgumentException("collectedBy must be FATHER or UNCLE");
         }
 
-        User collector = null;
-        if (collectedBy != null && collectedBy != OwnerType.NONE) {
-            collector = userRepository.findFirstByOwnerType(collectedBy)
-                    .orElseThrow(() -> new EntityNotFoundException("Collector not found for owner type"));
-        }
+        User collector = userRepository.findFirstByOwnerType(request.getCollectedBy())
+                .orElseThrow(() -> new EntityNotFoundException("Collector not found for owner type"));
 
         TransactionPayment payment = new TransactionPayment();
         payment.setLedgerEntry(ledger);
         payment.setCollectedBy(collector);
-        payment.setPaymentMode(resolvedMode);
-        payment.setAmount(amountPaid);
+        payment.setPaymentMode(request.getPaymentMode());
+        payment.setAmount(request.getAmountPaid());
         payment.setReceivedAt(Instant.now());
         transactionPaymentRepository.save(payment);
 
         BigDecimal currentPaid = ledger.getTotalPaid() == null ? BigDecimal.ZERO : ledger.getTotalPaid();
-        BigDecimal newTotalPaid = currentPaid.add(amountPaid);
-        BigDecimal balance = ledger.getTotalDue().subtract(newTotalPaid);
+        BigDecimal newTotalPaid = currentPaid.add(request.getAmountPaid());
+        BigDecimal totalDue = ledger.getTotalDue();
+        if (totalDue == null) {
+            BigDecimal rent = ledger.getRentAmount() == null ? BigDecimal.ZERO : ledger.getRentAmount();
+            BigDecimal utilities = ledger.getUtilityAmount() == null ? BigDecimal.ZERO : ledger.getUtilityAmount();
+            BigDecimal additional = ledger.getAdditionalCharges() == null ? BigDecimal.ZERO : ledger.getAdditionalCharges();
+            BigDecimal previous = ledger.getPreviousBalance() == null ? BigDecimal.ZERO : ledger.getPreviousBalance();
+            totalDue = rent.add(utilities).add(additional).add(previous);
+            ledger.setTotalDue(totalDue);
+        }
+
+        BigDecimal balance = totalDue.subtract(newTotalPaid);
         if (balance.compareTo(BigDecimal.ZERO) < 0) {
             balance = BigDecimal.ZERO;
         }
@@ -99,6 +108,27 @@ public class TransactionLedgerServiceImpl implements TransactionLedgerService {
             ledger.setStatus(LedgerStatus.UNPAID);
         }
 
-        return transactionLedgerRepository.save(ledger);
+        TransactionLedger saved = transactionLedgerRepository.save(ledger);
+        return toResponse(saved);
+    }
+
+    private LedgerResponseDTO toResponse(TransactionLedger ledger) {
+        String period = ledger.getBillingPeriod() == null ? null : ledger.getBillingPeriod().toString();
+        Long unitId = ledger.getUnit() == null ? null : ledger.getUnit().getId();
+        Long renterId = ledger.getRenter() == null ? null : ledger.getRenter().getId();
+        return new LedgerResponseDTO(
+                ledger.getId(),
+                unitId,
+                renterId,
+                period,
+                ledger.getRentAmount(),
+                ledger.getUtilityAmount(),
+                ledger.getAdditionalCharges(),
+                ledger.getPreviousBalance(),
+                ledger.getTotalDue(),
+                ledger.getTotalPaid(),
+                ledger.getBalanceCarryForward(),
+                ledger.getStatus()
+        );
     }
 }

@@ -1,11 +1,12 @@
 package com.grihakhata.service;
 
 import com.grihakhata.domain.Unit;
+import com.grihakhata.dto.UnitResponseDTO;
 
 import java.util.List;
 
 public interface UnitService {
-    Unit create(Unit unit);
+    UnitResponseDTO create(Unit unit);
     Unit getById(Long id);
-    List<Unit> getByBuilding(Long buildingId);
+    List<UnitResponseDTO> getByBuilding(Long buildingId);
 }
