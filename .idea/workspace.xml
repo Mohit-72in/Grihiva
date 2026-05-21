@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37a13ada-c066-4678-a664-b76eaafca210" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/UserRegistrationRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/UnitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/UnitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/UnitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/UnitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/UnitServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/UnitServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/grihakhata/config/SwaggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/grihakhata/config/SwaggerConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/grihakhata/controller/UnitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/grihakhata/controller/UnitController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/grihakhata/service/UnitService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/grihakhata/service/UnitService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/grihakhata/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/grihakhata/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/grihakhata/service/impl/UnitServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/grihakhata/service/impl/UnitServiceImpl.class" afterDir="false" />
-    </list>
+    <list default="true" id="37a13ada-c066-4678-a664-b76eaafca210" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +89,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.GrihaKhataApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "mohit",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Dell/Desktop/Grihiva",
