@@ -9,4 +9,5 @@ public interface UnitService {
     UnitResponseDTO create(Unit unit);
     Unit getById(Long id);
     List<UnitResponseDTO> getByBuilding(Long buildingId);
+    UnitResponseDTO assignRenter(Long unitId, Long renterId);
 }

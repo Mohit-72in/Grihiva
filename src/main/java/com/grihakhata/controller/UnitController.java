@@ -63,4 +63,11 @@ public class UnitController {
     public ResponseEntity<List<UnitResponseDTO>> listUnits(@PathVariable Long buildingId) {
         return ResponseEntity.ok(unitService.getByBuilding(buildingId));
     }
+
+    @Operation(summary = "Assign renter", description = "Assign a renter to a unit and mark it occupied.")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping("/{unitId}/assign-renter/{renterId}")
+    public ResponseEntity<UnitResponseDTO> assignRenter(@PathVariable Long unitId, @PathVariable Long renterId) {
+        return ResponseEntity.ok(unitService.assignRenter(unitId, renterId));
+    }
 }

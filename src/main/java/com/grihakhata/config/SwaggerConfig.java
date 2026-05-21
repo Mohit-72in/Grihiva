@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -17,6 +18,9 @@ import org.springframework.context.annotation.Configuration;
         ),
         servers = {
                 @Server(url = "http://localhost:8080", description = "Local dev")
+        },
+        security = {
+                @SecurityRequirement(name = "bearerAuth")
         }
 )
 @SecurityScheme(
@@ -28,4 +32,3 @@ import org.springframework.context.annotation.Configuration;
 )
 public class SwaggerConfig {
 }
-
