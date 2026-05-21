@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37a13ada-c066-4678-a664-b76eaafca210" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/TransactionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/domain/RefreshToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/LedgerResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/RefreshTokenRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/RentPaymentRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/TokenRefreshResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/UnitCreateRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/UnitResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/repository/RefreshTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/RefreshTokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/RefreshTokenServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__add_envers_and_payments.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V3__add_refresh_tokens.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/BuildingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/BuildingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/UnitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/controller/UnitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/domain/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/domain/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/JwtResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/dto/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/TransactionLedgerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/TransactionLedgerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/UnitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/UnitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/TransactionLedgerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/TransactionLedgerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/UnitServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grihakhata/service/impl/UnitServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
